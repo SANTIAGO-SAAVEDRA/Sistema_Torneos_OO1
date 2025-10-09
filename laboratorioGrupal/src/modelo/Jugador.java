@@ -3,6 +3,7 @@ package modelo;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.Period;
 
 public class Jugador {
 	private int id;
@@ -110,21 +111,12 @@ public class Jugador {
 	}
     public static int calcularEdad(LocalDate nacimiento) {
         LocalDate hoy = LocalDate.now();
-        /* Primero Calculo aproximadamente solo con el año, y
-         * despues le resto 1, si corresponde.*/
-        int edad = hoy.getYear() - nacimiento.getYear();
-        
-        if (hoy.getMonthValue() < nacimiento.getMonthValue() ||
-           (hoy.getMonthValue() == nacimiento.getMonthValue() && 
-            hoy.getDayOfMonth() < nacimiento.getDayOfMonth())) {
-            edad--;
-        }
-        return edad;
+        return Period.between(nacimiento,hoy).getYears();
     }
     
 	@Override
 	public String toString() {
-		return super.toString()
-				+ "\nEstatura: " + estatura + "m, peso: " + peso + "kg, posicion " + posicion + ", camiseta " + camiseta;
+		return "Nombre: " + nombre + " " + apellido 
+				+ " | Estatura: " + estatura + "m | Peso: " + peso + "kg | Posición: " + posicion + " | Camiseta: " + camiseta;
 	}
 }

@@ -34,25 +34,27 @@ public class Sistema {
    
     public Equipo agregarEquipo(String nombre, Entrenador entrenador, LocalDate fechaCreacion) {
         int id = (equipos.isEmpty()) ? 1 : equipos.get(equipos.size() - 1).getId() + 1;
+        Equipo agregado = null;
         try {
             Equipo equipo = new Equipo(id, nombre, entrenador, fechaCreacion);
-            equipos.add(equipo);
-            return equipo;
+            if(equipos.add(equipo))
+            	agregado = equipo;
         } catch (Exception e) {
             System.out.println("Excepción: " + e.getMessage());
-            return null;
         }
+        return agregado;
     }
     public Jugador agregarJugador(String nombre, String apellido, long dni, LocalDate fechaNacimiento, float estatura, float peso, String posicion, int camiseta) {
         int id = (jugadores.isEmpty()) ? 1 : jugadores.get(jugadores.size() - 1).getId() + 1;
+        Jugador agregado = null;
         try {
             Jugador jugador = new Jugador(id, nombre, apellido, dni, fechaNacimiento, estatura, peso, posicion, camiseta);
-            jugadores.add(jugador);
-            return jugador;
+            if (jugadores.add(jugador))
+            	agregado = jugador;
         } catch (Exception e) {
             System.out.println("Excepción: " + e.getMessage());
-            return null;
         }
+        return agregado;
     }
 
     public Entrenador agregarEntrenador(String nombre, String apellido, long dni, LocalDate fechaNacimiento, String estrategiaFavorita) {
@@ -69,7 +71,8 @@ public class Sistema {
     			entrenadores.add(actual);
     		}
     	}
-		if (entrenadores.size() == 0) throw new Exception("Error: Tactica no valida");
+		if (entrenadores.isEmpty())
+			throw new Exception("Error: Tactica no valida");
 		return entrenadores;
     }
     
@@ -80,43 +83,64 @@ public class Sistema {
     			encontrados.add(actual);
     		}
     	}
-		if (encontrados.size() == 0) throw new Exception("Error: Fechas no validas.");
+		if (encontrados.isEmpty())
+			throw new Exception("Error: Fechas no validas.");
 		return encontrados;
     }
     
     public Entrenador traerEntrenadorPorId(int id) throws Exception {
-        for (Entrenador e : entrenadores) {
-            if (e.getId() == id) return e;
+    	Entrenador encontrado = null;
+    	for (Entrenador e : entrenadores) {
+            if (e.getId() == id)
+            	encontrado = e;
         }
-        throw new Exception("Entrenador no encontrado.");
+        if (encontrado == null)
+        	throw new Exception("Entrenador no encontrado.");
+        return encontrado;
     }
     
     public Jugador traerJugadorPorId(int id) throws Exception {
-        for (Jugador j : jugadores) {
-            if (j.getId() == id) return j;
+    	Jugador encontrado = null;
+    	for (Jugador j : jugadores) {
+            if (j.getId() == id)
+            	encontrado = j;
         }
-        throw new Exception("Jugador no encontrado.");
+        if (encontrado == null)
+        	throw new Exception("Jugador no encontrado.");
+        return encontrado;
     }
     
     public Equipo traerEquipoPorId(int id) throws Exception {
-        for (Equipo eq : equipos) {
-            if (eq.getId() == id) return eq;
+    	Equipo encontrado = null;
+    	for (Equipo eq : equipos) {
+            if (eq.getId() == id)
+            	encontrado = eq;
         }
-        throw new Exception("Equipo no encontrado.");
+        if (encontrado == null)
+        	throw new Exception("Equipo no encontrado.");
+        return encontrado;
     }
     
     public Partido traerPartidoPorId(int id) throws Exception {
+    	Partido encontrado = null;
         for (Partido p : partidos) {
-            if (p.getId() == id) return p;
+            if (p.getId() == id)
+            	encontrado = p;
         }
-        throw new Exception("Partido no encontrado.");
+        if (encontrado == null)
+        	throw new Exception("Partido no encontrado.");
+        return encontrado;
     }
     
     public Torneo traerTorneoPorNombre(String nombre) throws Exception {
+    	Torneo encontrado = null;
         for (Torneo t : torneos) {
-            if (t.getNombre().equalsIgnoreCase(nombre)) return t;
+            if (t.getNombre().equalsIgnoreCase(nombre))
+            	encontrado = t;
         }
-        throw new Exception("Torneo no encontrado.");
+        if (encontrado == null)
+        	throw new Exception("Torneo no encontrado.");
+        return encontrado;
     }
     public List<Jugador> buscarJugadoresNacidosEntre(LocalDate inicio, LocalDate fin) throws Exception {
         List<Jugador> encontrados = new ArrayList<>();

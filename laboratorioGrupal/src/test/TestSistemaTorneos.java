@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import modelo.Sistema;
 import modelo.Entrenador;
 import modelo.Equipo;
-import modelo.EstadisticaPartido;
 import modelo.Ganador;
 import modelo.Jugador;
 import modelo.Partido;
@@ -52,6 +51,19 @@ public class TestSistemaTorneos {
 	        }
 	        System.out.println();
 
+
+	        try {
+	            Equipo equipo = s.traerEquipoPorId(1);
+	            System.out.println("Cantidad Jugadores " + equipo.getJugadores().size() + " jugadores.");
+	            equipo.agregarJugador(s.traerJugadorPorId(1));
+	            equipo.agregarJugador(s.traerJugadorPorId(2));
+	            equipo.eliminarJugador(2);
+	            System.out.println("Cantidad Jugadores " + equipo.getJugadores().size() + " jugadores.");
+	        } catch (Exception e) {
+	            System.out.println(e.getMessage());
+	        }
+	        System.out.println();
+
 	        try {
 	            Jugador jugador = s.traerJugadorPorId(1);
 	            System.out.println("Jugador encontrado: " + jugador.getNombre() + " " + jugador.getApellido());
@@ -60,17 +72,6 @@ public class TestSistemaTorneos {
 	        } catch (Exception e) {
 	            System.out.println(e.getMessage());
 	        }
-	        System.out.println();
-
-	        try {
-	            List<Entrenador> lista = s.getEntrenadoresPorTactica("4-4-2");
-	            for (Entrenador e : lista) {
-	                System.out.println("Entrenador: " + e.getNombre() + " " + e.getApellido());
-	            }
-	        } catch (Exception e) {
-	            System.out.println(e.getMessage());
-	        }
-	        System.out.println();
 	        
 	        try {
 	            Equipo boca = s.traerEquipoPorId(1);
@@ -81,16 +82,44 @@ public class TestSistemaTorneos {
 
 	            s.agregarEstadistica(partido, boca, 2, 1, 90);
 	            s.agregarEstadistica(partido, river, 1, 0, 90);
-
 	            Torneo torneo = s.traerTorneoPorNombre("Clausura 2025");
 	            torneo.agregarPartido(partido);
+	        }
+	        catch (Exception e) {
+	        	System.out.println(e.getMessage());
+	        }
 
+	        try {
+	        	System.out.println("\n4.) ganadores el 15/4/2025 en Clausura 2025:\n");
+	        	Torneo torneo = s.traerTorneoPorNombre("Clausura 2025");
 	            List<Ganador> ganadores = torneo.ganadoresEnFecha(LocalDate.of(2025, 4, 15));
 	            for (Ganador g : ganadores) {
 	                System.out.println("Ganador: " + g.getGanador().getNombre() +
 	                                   " | Goles: " + g.getGoles() +
 	                                   " | Fecha: " + g.getFecha());
 	            }
+	        } catch (Exception e) {
+	            System.out.println(e.getMessage());
+	        }
+	        
+	        try {
+	        	System.out.println("\n5.) Entrenador con Tactica favorita 4-4-2\n");
+	        	List<Entrenador> entrenadores442 = s.getEntrenadoresPorTactica("4-4-2");
+	        	
+	        	for(Entrenador entrenador : entrenadores442) {
+	        		System.out.println(entrenador);
+	        	}
+	        } catch (Exception e) {
+	            System.out.println(e.getMessage());
+	        }
+	        
+	        try {
+	        	System.out.println("\n6.) Jugadores nacidos entre 1960 y 1990:\n");
+	        	List<Jugador> jugadoresNacidos = s.getJugadoresNacidosEntre(LocalDate.of(1960, 1, 1), LocalDate.of(1990, 1, 1));
+	        	
+	        	for(Jugador viejo: jugadoresNacidos) {
+	        		System.out.println(viejo);
+	        	}
 	        } catch (Exception e) {
 	            System.out.println(e.getMessage());
 	        }

@@ -57,4 +57,10 @@ public class Entrenador {
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	@Override
+	public String toString() {
+		return "Nombre: " + nombre + " " + apellido + " | DNI: " + dni + " | fecha de Nacimiento: " + fechaNacimiento;
+	}
+	
+	
 }

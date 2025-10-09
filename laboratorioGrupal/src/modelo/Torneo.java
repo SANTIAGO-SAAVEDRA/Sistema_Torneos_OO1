@@ -107,7 +107,7 @@ public class Torneo {
 		}
 		if (!fechaValida)
 			throw new Exception("Error: En la fecha no hubieron partidos.");
-		if (ganadores.size() == 0)
+		if (ganadores.isEmpty())
 			throw new Exception("Error: No hay ganadores");
 		return ganadores;
 	}

@@ -78,7 +78,7 @@ public class Equipo {
             throw new Exception("La abreviatura del equipo debe tener 3 caracteres");
         }
         this.abreviatura = abreviatura.toUpperCase();
-        }
+    }
 	public Entrenador getEntrenador() {
 		return entrenador;
 	}
