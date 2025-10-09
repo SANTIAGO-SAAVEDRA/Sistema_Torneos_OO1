@@ -175,5 +175,53 @@ public class Sistema {
         return encontrados;
     }
 
+	public List<Torneo> getTorneos() {
+		return torneos;
+	}
+
+	public void setTorneos(List<Torneo> torneos) {
+		this.torneos = torneos;
+	}
+
+	public List<Equipo> getEquipos() {
+		return equipos;
+	}
+
+	public void setEquipos(List<Equipo> equipos) {
+		this.equipos = equipos;
+	}
+
+	public List<Jugador> getJugadores() {
+		return jugadores;
+	}
+
+	public void setJugadores(List<Jugador> jugadores) {
+		this.jugadores = jugadores;
+	}
+
+	public List<Entrenador> getEntrenadores() {
+		return entrenadores;
+	}
+
+	public void setEntrenadores(List<Entrenador> entrenadores) {
+		this.entrenadores = entrenadores;
+	}
+
+	public List<Partido> getPartidos() {
+		return partidos;
+	}
+
+	public void setPartidos(List<Partido> partidos) {
+		this.partidos = partidos;
+	}
+
+	public List<EstadisticaPartido> getEstadisticas() {
+		return estadisticas;
+	}
+
+	public void setEstadisticas(List<EstadisticaPartido> estadisticas) {
+		this.estadisticas = estadisticas;
+	}
+
     
 }

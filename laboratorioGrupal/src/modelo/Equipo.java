@@ -103,6 +103,20 @@ public class Equipo {
 
 	    return totalAltura / jugadores.size();
 	}
+	@Override
+	public String toString() {
+		String jug_str = "Jugadores: ";
+		if (jugadores.isEmpty()) {
+			jug_str+="No tiene.";			
+		} else {			
+			for (Jugador j : jugadores) {
+				jug_str += "\n" +j.toString();
+			}
+		}
+		return "Nombre: " + nombre + " (" + abreviatura + ") | Entrenador: " + entrenador.getNombre()
+				+ " " + entrenador.getApellido() + " | fecha de Creacion: " + fechaCreacion
+				+ "\n" + jug_str;
+	}
 
 	
 	
