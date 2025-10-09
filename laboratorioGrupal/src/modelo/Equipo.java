@@ -91,7 +91,19 @@ public class Equipo {
 	public void setFechaCreacion(LocalDate fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
-	
+	public float calcularAlturaPromedio() throws Exception {
+	    if (jugadores.isEmpty()) {
+	        throw new Exception("El equipo no tiene jugadores para calcular el promedio.");
+	    }
+
+	    float totalAltura = 0;
+	    for (Jugador j : jugadores) {
+	        totalAltura += j.getEstatura();
+	    }
+
+	    return totalAltura / jugadores.size();
+	}
+
 	
 	
 }

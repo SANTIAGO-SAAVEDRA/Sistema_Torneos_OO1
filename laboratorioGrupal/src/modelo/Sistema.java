@@ -118,5 +118,38 @@ public class Sistema {
         }
         throw new Exception("Torneo no encontrado.");
     }
+    public List<Jugador> buscarJugadoresNacidosEntre(LocalDate inicio, LocalDate fin) throws Exception {
+        List<Jugador> encontrados = new ArrayList<>();
+
+        for (Jugador j : jugadores) {
+            if ((j.getFechaNacimiento().isAfter(inicio) || j.getFechaNacimiento().isEqual(inicio))
+                    && (j.getFechaNacimiento().isBefore(fin) || j.getFechaNacimiento().isEqual(fin))) {
+                encontrados.add(j);
+            }
+        }
+
+        if (encontrados.isEmpty()) {
+            throw new Exception("No se encontraron jugadores nacidos entre esas fechas.");
+        }
+
+        return encontrados;
+    }
+
+    public List<Equipo> buscarEquiposFundadosAntesDe(LocalDate fecha) throws Exception {
+        List<Equipo> encontrados = new ArrayList<>();
+
+        for (Equipo e : equipos) {
+            if (e.getFechaCreacion().isBefore(fecha)) {
+                encontrados.add(e);
+            }
+        }
+
+        if (encontrados.isEmpty()) {
+            throw new Exception("No se encontraron equipos fundados antes de la fecha indicada.");
+        }
+
+        return encontrados;
+    }
+
     
 }

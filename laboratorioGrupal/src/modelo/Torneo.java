@@ -125,4 +125,43 @@ public class Torneo {
 	    }
 	    if (!eliminado) throw new Exception("Error: Equipo no encontrado en el torneo.");
 	}
+	public Equipo equipoConMayorAlturaPromedio() throws Exception {
+	    if (equipos.isEmpty()) {
+	        throw new Exception("El torneo no tiene equipos cargados.");
+	    }
+
+	    Equipo mayor = equipos.get(0);
+	    float maxPromedio = mayor.calcularAlturaPromedio();
+
+	    for (Equipo e : equipos) {
+	        float promedioActual = e.calcularAlturaPromedio();
+	        if (promedioActual > maxPromedio) {
+	            maxPromedio = promedioActual;
+	            mayor = e;
+	        }
+	    }
+
+	    return mayor;
+	}
+
+	public int calcularPuntosEquipo(Equipo equipo) throws Exception {
+	    int puntos = 0;
+	    if (partidos.isEmpty()) {
+	        throw new Exception("No hay partidos registrados en el torneo.");
+	    }
+
+	    for (Partido p : partidos) {
+	        int[] goles = p.calcularGoles();
+
+	        if (p.getLocal() == equipo) {
+	            if (goles[0] > goles[1]) puntos += 3; // gana local
+	            else if (goles[0] == goles[1]) puntos += 1; // empate
+	        } else if (p.getVisitante() == equipo) {
+	            if (goles[1] > goles[0]) puntos += 3; // gana visitante
+	            else if (goles[1] == goles[0]) puntos += 1; // empate
+	        }
+	    }
+
+	    return puntos;
+	}
 }
