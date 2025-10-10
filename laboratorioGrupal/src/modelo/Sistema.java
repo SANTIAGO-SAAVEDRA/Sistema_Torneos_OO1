@@ -31,7 +31,6 @@ public class Sistema {
         partidos.add(partido);
         return partido;
     }
-   
     public Equipo agregarEquipo(String nombre, Entrenador entrenador, LocalDate fechaCreacion) {
         int id = (equipos.isEmpty()) ? 1 : equipos.get(equipos.size() - 1).getId() + 1;
         Equipo agregado = null;

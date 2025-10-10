@@ -117,6 +117,7 @@ public class Jugador {
 	@Override
 	public String toString() {
 		return "Nombre: " + nombre + " " + apellido 
-				+ " | Estatura: " + estatura + "m | Peso: " + peso + "kg | Posición: " + posicion + " | Camiseta: " + camiseta;
+				+ " | Estatura: " + estatura + "m | Peso: " + peso + "kg | Posición: " + posicion
+				+ " | Camiseta: " + camiseta + " | Fecha de nacimiento: "+ fechaNacimiento;
 	}
 }
