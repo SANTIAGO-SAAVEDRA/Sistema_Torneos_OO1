@@ -127,7 +127,7 @@ public class Torneo {
 	}
 	public Equipo equipoConMayorAlturaPromedio() throws Exception {
 	    if (equipos.isEmpty()) {
-	        throw new Exception("El torneo no tiene equipos cargados.");
+	    	throw new Exception("El torneo "+ nombre + " no tiene equipos.");
 	    }
 
 	    Equipo mayor = equipos.get(0);
@@ -154,14 +154,74 @@ public class Torneo {
 	        int[] goles = p.calcularGoles();
 
 	        if (p.getLocal() == equipo) {
-	            if (goles[0] > goles[1]) puntos += 3; // gana local
-	            else if (goles[0] == goles[1]) puntos += 1; // empate
+	            if (goles[0] > goles[1])
+	            	puntos += 3; // gana de local
+	            else if (goles[0] == goles[1])
+	            	puntos += 1; // empate
 	        } else if (p.getVisitante() == equipo) {
-	            if (goles[1] > goles[0]) puntos += 3; // gana visitante
-	            else if (goles[1] == goles[0]) puntos += 1; // empate
+	            if (goles[1] > goles[0])
+	            	puntos += 3; // gana de visitante
+	            else if (goles[1] == goles[0])
+	            	puntos += 1; // empate
 	        }
 	    }
 
 	    return puntos;
 	}
+	public List<Posicion> generarTablaPosiciones() throws Exception {
+		List<Posicion> tabla = new ArrayList<Posicion>();
+		if (equipos.isEmpty()) {
+	        throw new Exception("El torneo "+ nombre + " no tiene equipos.");
+	    }
+
+	    for (Equipo e : equipos) {
+	    	Posicion pos = new Posicion(e, calcularPuntosEquipo(e));
+	    	tabla.add(pos);
+	    }
+	    for (int i = 0; i < tabla.size() - 1; i++) {
+	        for (int j = 0; j < tabla.size() - 1 - i; j++) {
+	            if (tabla.get(j).getPuntaje() < tabla.get(j + 1).getPuntaje()) {
+	                Posicion temp = tabla.get(j);
+	                tabla.set(j, tabla.get(j + 1));
+	                tabla.set(j + 1, temp);
+	            }
+	        }
+	    }
+	    return tabla;
+	}
+	public int traerGolesDeJugador(Jugador jugador) throws Exception {
+		if (partidos.isEmpty()) {
+	        throw new Exception("El torneo "+ nombre + " no tiene partidos jugados.");
+	    }
+
+		int goles = 0;
+		for (Partido partido:partidos) {
+			if (partido.getEstadisticas().isEmpty()) {
+		        throw new Exception("El partido no tiene estadistiacs.");
+		    }
+			for (EstadisticaPartido stat : partido.getEstadisticas()) {
+				if (stat.getJugador().equals(jugador))
+					goles += stat.getGoles();
+			}
+		}
+		return goles;
+	}
+	public int traerAsistenciasDeJugador(Jugador jugador) throws Exception {
+		if (partidos.isEmpty()) {
+	        throw new Exception("El torneo "+ nombre + " no tiene partidos jugados.");
+	    }
+
+		int asistencia = 0;
+		for (Partido partido:partidos) {
+			if (partido.getEstadisticas().isEmpty()) {
+		        throw new Exception("El partido no tiene estadistiacs.");
+		    }
+			for (EstadisticaPartido stat : partido.getEstadisticas()) {
+				if (stat.getJugador().equals(jugador))
+					asistencia += stat.getAsistencias();
+			}
+		}
+		return asistencia;
+	}
+
 }

@@ -105,17 +105,12 @@ public class Equipo {
 	}
 	@Override
 	public String toString() {
-		String jug_str = "Jugadores: ";
-		if (jugadores.isEmpty()) {
-			jug_str+="No tiene.";			
-		} else {			
-			for (Jugador j : jugadores) {
-				jug_str += "\n" +j.toString();
-			}
-		}
-		return "Nombre: " + nombre + " (" + abreviatura + ") | Entrenador: " + entrenador.getNombre()
-				+ " " + entrenador.getApellido() + " | fecha de Creacion: " + fechaCreacion
-				+ "\n" + jug_str;
+		return String.format("Equipo: %-3s | Nombre: %-15s | Entrenador: %-30s | Cración: %s",
+				abreviatura,
+				nombre.length() > 15 ? nombre.substring(0,15):nombre,
+				entrenador.getNombreCompleto().length() > 30 ? entrenador.getNombreCompleto() .substring(0,15):entrenador.getNombreCompleto(),
+				fechaCreacion
+				);
 	}
 
 	

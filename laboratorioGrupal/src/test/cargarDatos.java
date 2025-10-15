@@ -16,7 +16,6 @@ public class cargarDatos {
 		Entrenador gallardo = s.agregarEntrenador("Marcelo", "Gallardo", 23456789, LocalDate.of(1976, 1, 18), "4-3-1-2");
 		Entrenador gareca = s.agregarEntrenador("Ricardo", "Gareca", 34567890, LocalDate.of(1958, 2, 10), "4-4-2");
 		Entrenador scaloni = s.agregarEntrenador("Lionel", "Scaloni", 45678901, LocalDate.of(1978, 5, 16), "4-3-3");
-		Entrenador simeone = s.agregarEntrenador("Diego", "Simeone", 56789012, LocalDate.of(1970, 4, 28), "4-4-2");
 
 		// === EQUIPOS ===
 		Equipo boca = s.agregarEquipo("Boca Juniors", bianchi, LocalDate.of(1905, 4, 3));
@@ -58,32 +57,74 @@ public class cargarDatos {
 		racing.agregarJugador(sigali);
 		racing.agregarJugador(rojas);
 
-		// === PARTIDOS ===
-		Partido p1 = s.agregarPartido(LocalDate.of(2024, 2, 1), boca, river, "La Bombonera");
-		Partido p2 = s.agregarPartido(LocalDate.of(2024, 2, 1), velez, racing, "José Amalfitani");
-		Partido p3 = s.agregarPartido(LocalDate.of(2024, 2, 8), river, racing, "Monumental");
-		Partido p4 = s.agregarPartido(LocalDate.of(2024, 2, 8), boca, velez, "La Bombonera");
 		
 		Torneo clausura = s.crearTorneo("Clausura 2025", 
                 LocalDate.of(2025, 4, 1), 
                 LocalDate.of(2025, 8, 1));
 
 
-		clausura.agregarEquipo(racing);
 		clausura.agregarEquipo(boca);
+		clausura.agregarEquipo(racing);
 		clausura.agregarEquipo(river);
 		clausura.agregarEquipo(velez);
 		
 		
-		Partido partido = s.agregarPartido(
+		Partido p1 = s.agregarPartido(
                 LocalDate.of(2025, 4, 15),
                 boca,
                 river,
                 "La Bombonera"
         );
-        s.agregarEstadistica(partido, boca, 2, 1, 90);
-        s.agregarEstadistica(partido, river, 1, 0, 90);
-        clausura.agregarPartido(partido);
+        s.agregarEstadistica(p1, boca,romero, 2, 1, 90);
+        s.agregarEstadistica(p1, river,enzo, 1, 0, 90);
+        clausura.agregarPartido(p1);
+
+        Partido p2 = s.agregarPartido(
+                LocalDate.of(2025, 4, 22),
+                racing,
+                velez,
+                "Cilindro de Avellaneda"
+        );
+        s.agregarEstadistica(p2, racing, rojas, 1, 1, 88);
+        s.agregarEstadistica(p2, racing, sigali, 0, 0, 90);
+        s.agregarEstadistica(p2, velez, pratto, 1, 0, 90);
+        s.agregarEstadistica(p2, velez, almada, 0, 1, 85);
+        clausura.agregarPartido(p2);
+
+        Partido p3 = s.agregarPartido(
+                LocalDate.of(2025, 5, 1),
+                river,
+                velez,
+                "Monumental"
+        );
+        s.agregarEstadistica(p3, river, borja, 2, 0, 89);
+        s.agregarEstadistica(p3, river, enzo, 0, 2, 90);
+        s.agregarEstadistica(p3, velez, almada, 1, 0, 90);
+        clausura.agregarPartido(p3);
+
+        
+        Partido p4 = s.agregarPartido(
+                LocalDate.of(2025, 5, 8),
+                boca,
+                racing,
+                "La Bombonera"
+        );
+        s.agregarEstadistica(p4, boca, cavani, 2, 0, 90);
+        s.agregarEstadistica(p4, boca, rojo, 0, 1, 90);
+        s.agregarEstadistica(p4, racing, rojas, 1, 0, 90);
+        clausura.agregarPartido(p4);
+
+        
+        Partido p5 = s.agregarPartido(
+                LocalDate.of(2025, 5, 15),
+                river,
+                boca,
+                "Monumental"
+        );
+        s.agregarEstadistica(p5, river, borja, 1, 0, 90);
+        s.agregarEstadistica(p5, river, enzo, 0, 1, 90);
+        s.agregarEstadistica(p5, boca, cavani, 1, 0, 90);
+        clausura.agregarPartido(p5);
 
 
 	}

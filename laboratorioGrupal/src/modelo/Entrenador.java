@@ -57,9 +57,18 @@ public class Entrenador {
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+    public String getNombreCompleto() {
+    	return nombre+" "+apellido;
+    }
+    
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + " " + apellido + " | DNI: " + dni + " | fecha de Nacimiento: " + fechaNacimiento;
+	    return String.format(
+	        "Nombre: %-30s | Tactica Favorita: %-8s | Fecha de nacimiento: %s",
+	        getNombreCompleto().length() > 30 ? getNombreCompleto().substring(0, 30) : getNombreCompleto(),
+	        estrategiaFavorita.length()> 8 ? estrategiaFavorita.substring(0,8) : estrategiaFavorita,
+	        fechaNacimiento
+	    );
 	}
 	
 	

@@ -9,10 +9,11 @@ public class EstadisticaPartido {
 	private int minutosJugados;
 	private Partido partido;
 	
-	public EstadisticaPartido(int id,Partido partido,Equipo equipo, int goles, int asistencias, int minutosJugados) {
+	public EstadisticaPartido(int id,Partido partido,Equipo equipo, Jugador jugador, int goles, int asistencias, int minutosJugados) {
 		this.id = id;
 		this.setPartido(partido);
 		this.equipo = equipo;
+		this.jugador = jugador;
 		this.goles = goles;
 		this.asistencias = asistencias;
 		this.minutosJugados = minutosJugados;

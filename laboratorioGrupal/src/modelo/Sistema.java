@@ -18,11 +18,13 @@ public class Sistema {
         return torneo;
     }
     
-    public EstadisticaPartido agregarEstadistica(Partido partido, Equipo equipo, int goles, int asistencias, int minutosJugados) {
+    public EstadisticaPartido agregarEstadistica(Partido partido, Equipo equipo,Jugador jugador, int goles, int asistencias, int minutosJugados) {
         int id = (estadisticas.isEmpty()) ? 1 : estadisticas.get(estadisticas.size() - 1).getId() + 1;
-        EstadisticaPartido estadistica = new EstadisticaPartido(id, partido, equipo, goles, asistencias, minutosJugados);
-        estadisticas.add(estadistica);
-        partido.agregarEstadistica(estadistica);
+        EstadisticaPartido estadistica = new EstadisticaPartido(id, partido,equipo, jugador, goles, asistencias, minutosJugados);
+        if (estadisticas.add(estadistica)) {
+        	partido.agregarEstadistica(estadistica);
+        	jugador.agregarEstadistica(estadistica);
+        }
         return estadistica;
     }
     public Partido agregarPartido(LocalDate fecha, Equipo local, Equipo visitante, String estadio) {
@@ -74,19 +76,7 @@ public class Sistema {
 			throw new Exception("Error: Tactica no valida");
 		return entrenadores;
     }
-    
-    public List<Jugador> getJugadoresNacidosEntre(LocalDate inicio,LocalDate fin) throws Exception {
-		List<Jugador> encontrados = new ArrayList<Jugador>();
-    	for(Jugador actual: this.jugadores) {
-    		if (actual.getFechaNacimiento().isAfter(inicio) && actual.getFechaNacimiento().isBefore(fin)) {
-    			encontrados.add(actual);
-    		}
-    	}
-		if (encontrados.isEmpty())
-			throw new Exception("Error: Fechas no validas.");
-		return encontrados;
-    }
-    
+
     public Entrenador traerEntrenadorPorId(int id) throws Exception {
     	Entrenador encontrado = null;
     	for (Entrenador e : entrenadores) {
@@ -141,12 +131,12 @@ public class Sistema {
         	throw new Exception("Torneo no encontrado.");
         return encontrado;
     }
+    
     public List<Jugador> buscarJugadoresNacidosEntre(LocalDate inicio, LocalDate fin) throws Exception {
         List<Jugador> encontrados = new ArrayList<>();
 
         for (Jugador j : jugadores) {
-            if ((j.getFechaNacimiento().isAfter(inicio) || j.getFechaNacimiento().isEqual(inicio))
-                    && (j.getFechaNacimiento().isBefore(fin) || j.getFechaNacimiento().isEqual(fin))) {
+        	if (j.getFechaNacimiento().isAfter(inicio) && j.getFechaNacimiento().isBefore(fin)) {
                 encontrados.add(j);
             }
         }
@@ -222,5 +212,4 @@ public class Sistema {
 		this.estadisticas = estadisticas;
 	}
 
-    
 }

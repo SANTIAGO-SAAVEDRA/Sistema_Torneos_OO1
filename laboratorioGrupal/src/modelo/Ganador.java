@@ -57,4 +57,14 @@ public class Ganador {
 		this.goles = goles;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Equipo: %-15s | Goles: %2d | Fecha: %s",
+				ganador.getNombre().length()>15 ? ganador.getNombre().substring(0,15):ganador.getNombre(),
+				goles,
+				fecha
+				);
+	}
+
+	
 }

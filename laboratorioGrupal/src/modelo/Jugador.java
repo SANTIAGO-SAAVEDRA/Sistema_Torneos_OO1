@@ -33,10 +33,8 @@ public class Jugador {
 		this.camiseta = camiseta;
 	}
 	
-	public void agregarEstadistica(Partido partido, Equipo equipo, int goles, int asistencias, int minutosJugados) {
-	    int id = (estadisticas.isEmpty()) ? 1 : estadisticas.get(estadisticas.size() - 1).getId() + 1;
-	    EstadisticaPartido estadistica = new EstadisticaPartido(id, partido, equipo, goles, asistencias, minutosJugados);
-	    estadisticas.add(estadistica);
+	public void agregarEstadistica(EstadisticaPartido estadistica) {
+		estadisticas.add(estadistica);
 	}
 	public EstadisticaPartido getEstadistica(int id) throws Exception {
 		EstadisticaPartido encontrado = null;
@@ -114,10 +112,21 @@ public class Jugador {
         return Period.between(nacimiento,hoy).getYears();
     }
     
+    public String getNombreCompleto() {
+    	return nombre+" "+apellido;
+    }
+    
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + " " + apellido 
-				+ " | Estatura: " + estatura + "m | Peso: " + peso + "kg | Posición: " + posicion
-				+ " | Camiseta: " + camiseta + " | Fecha de nacimiento: "+ fechaNacimiento;
+	    return String.format(
+	        "Nombre: %-30s | Estatura: %6.2fm | Peso: %6.2fkg | Posición: %-13s | Camiseta: %2d | Fecha de nacimiento: %s",
+	        getNombreCompleto().length() > 30 ? getNombreCompleto().substring(0, 30) : getNombreCompleto(),
+	        estatura,
+	        peso,
+	        posicion.length() > 13 ? posicion.substring(0, 13) : posicion,
+	        camiseta,
+	        fechaNacimiento
+	    );
 	}
+
 }
